@@ -1,33 +1,117 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>contacts的demo</title>
-    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="format-detection" content="telephone=no" />
+<title>contacts的demo</title>
+<script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+<link href="reset.css" type="text/css" rel="stylesheet" />
+<link href="contacts.css" type="text/css" rel="stylesheet" />
 </head>
+
 <body>
-<h2>contacts的demo</h2>
+<div id="wrap">
+	<!--main{{-->
+	<div id="main" class="add">
+		<div id="showPhones">
+			<div class="box">
+				<h3>好友:</h3>
+				<input id="holder" class="" type="tel" placeholder="可输入手机号码" />
+			</div>
+		</div>
+
+		<div id="phones">
+			<div class="box">
+				<span id="getMore" class="hidden">使用更多联系人..</span>
+			</div>
+		</div>
+	</div>
+	<!--main}}-->
+
+	<!--sidebar{{-->
+	<ul id="sidebar"></ul>
+	<!--sidebar}}-->
+
+	<!--toolbar{{-->
+	<div id="toolbar">
+		<div class="box">
+			<button id="delall"></button>
+			<div class="showNumber">您已选择<em>0</em>位好友</div>
+			<button id="confirm"></button>
+		</div>	
+	</div>
+	<!--toolbar{{-->
+</div>
+
+<img src="http://a.tbcdn.cn/mw/base/styles/component/more/images/loading.gif" width="30" height="12" id="loading" />
+
+<!--联系人渲染模板{{-->
+<script type="javascript/template" id="phoneTmp">
+	<% if (typeof checked !== 'undefined') { %>
+		<span class="checkbox selected"></span>
+	<% } else { %>
+		<span class="checkbox"></span>
+	<% } %>
+		<span class="name"><%= name %></span>
+		<span class="phone"><%= phone %></span>
+</script>
+<!--联系人渲染模板}}-->
 
 <script>
-    var S = KISSY;
-    if (S.Config.debug) {
-        var srcPath = "../../../";
-        S.config({
-            packages:[
-                {
-                    name:"gallery",
-                    path:srcPath,
-                    charset:"utf-8",
-                    ignorePackageNameInUri:true
-                }
-            ]
-        });
-    }
 
-    S.use('gallery/contacts/1.0/index', function (S, Contacts) {
-          new Contacts();
-    })
+	var S = KISSY;
+	if (S.Config.debug) {
+		var srcPath = "../../../";
+		S.config({
+			packages:[
+				{
+					name:"gallery",
+					path:srcPath,
+					charset:"utf-8",
+					ignorePackageNameInUri:true
+				}
+			]
+		});
+	}
+
+	S.use('gallery/contacts/1.0/index', function (S, Contacts) {
+		var phones = [
+			{'name':'比克','phone':'13757113126'},
+			{'name':'毕福剑','phone':'13757113127'},
+			{'name':'李丽华','phone':'13757113116'},
+			{'name':'荆轲','phone':'12345678922'},
+			{'name':'何冰','phone':'12345678923'},
+			{'name':'邵云','phone':'13758112880'},
+			{'name':'太白','phone':'13588494123'},
+			{'name':'童林','phone':'13656684279'},
+			{'name':'玄清','phone':'18267126678'},
+			{'name':'天樵','phone':'13656645099'},
+			{'name':'天意','phone':'12345678921'},
+			{'name':'zy','phone':'12345668921'},
+			{'name':'阿姨','phone':'13757114126'}
+		];
+
+		var preSelectArr = ['13757113126','13757114126'];
+
+		var contact = new Contacts({
+			preSelectArr : preSelectArr,
+			data : phones,
+			pageSize : 5,
+			maxSelect : 10 
+		});
+
+		contact.on('selectDone' , function (obj) {
+			alert('选择联系人完毕\n可使用数据完成其他操作');
+			alert('已选联系人:\n' + JSON.stringify(obj));
+		});
+
+		contact.on('readAfter' , function (e) {
+			alert('已经读取完预存的已选号码\n可选择性删除数据源(通常是localStorage、sessionStorage)')	
+		});
+	});
+
 </script>
+
 </body>
 </html>
