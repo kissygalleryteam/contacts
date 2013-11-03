@@ -1,0 +1,14 @@
+{
+    "name": "contacts",
+    "version": "1.0",
+    "desc": "",
+    "cover": "",
+    "tag":"mobile,通讯录",
+    "author": {
+        "name": "栋寒",
+        "email": "donghan@taobao.com",
+        "page": ""
+    },
+    "type": "kissy-gallery",
+    "type-url": "http://gallery.kissyui.com/guide"
+}
