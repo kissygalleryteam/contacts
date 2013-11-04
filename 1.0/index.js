@@ -519,7 +519,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Piny
 			});
 
 			sidebar.append(str);
-			sidebar.css('height' , S.one('body').height() - 95 + 'px');
+			//sidebar.css('height' , S.one('body').height() - 95 + 'px');
 
 		} , 
 
