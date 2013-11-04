@@ -3,12 +3,14 @@
  * @author 栋寒<donghan@taobao.com>
  * @module contacts
  **/
-KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , Pinyin , Confirm) {
+KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Pinyin , Confirm) {
 	
 	'use strict';
 
 	window['C'] = {};
 	
+	var $ = Backbone.$ , _ = Backbone._;
+
 	var hook = {
 		phonesbox : $('#phones .box'),
 		getMorePhone : $('#getMore'),
@@ -31,28 +33,25 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 	var PhoneCollection = Backbone.Collection.extend({
 		model : PhoneModel,
 		initialize : function () {
-			this.frag = document.createDocumentFragment();
 			this.bind('add' , this.addOne , false);		
 		},
 		
 		// 数据集合中增加单条数据元的回调
-		addOne : function (data , s , option) {
+		addOne : function (data) {
 			var phoneview = new PhoneView({
 				model : data	
 			});	
 			var el = phoneview.render().$el;
-			$(this.frag).append(el);
 
-			if (option.index === (s.length - 1)) {
-				hook.getMorePhone.before(this.frag);
-				hook.getMorePhone.removeClass('hidden');
+			hook.getMorePhone.before(el);
+			hook.getMorePhone.removeClass('hidden');
 
-				// 防止多次refresh
-				timer && clearTimeout(timer);
-				timer = setTimeout(function () {
-					C.phoneScroll.refresh();
-				} , 100);
-			}
+			// 防止多次refresh
+			timer && clearTimeout(timer);
+			timer = setTimeout(function () {
+				C.phoneScroll.refresh();
+			} , 100);
+
 		},
 
 		// 根据电话号码检索集合中是否存在数据元
@@ -133,7 +132,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 		checkedStatus : function () {
 			var model = this.model;
 			var checked = model.get('checked'),
-				checkbox = this.$el.find('.checkbox');
+				checkbox = this.$el.one('.checkbox');
 			checked ? checkbox.addClass('selected') : checkbox.removeClass('selected');
 		},
 
@@ -147,7 +146,6 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 				this.$el.addClass('phoneItem');	
 				renderTmp = hook.phonetmp.html();
 			}
-
 			var domStr = _.template(renderTmp , obj);
 			this.$el.html(domStr);
 
@@ -244,21 +242,21 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 			if (count > bug) {
 				holder.attr({
 					'placeholder' : ''
-				}).val('').addClass('hidden').blur();
+				}).val('').addClass('hidden')[0].blur();
 			} else {
 				holder.attr({
 					'placeholder' : '可输入手机号码',
-				}).val('').removeClass('hidden').blur();
+				}).val('').removeClass('hidden')[0].blur();
 			}
 		},
 		
 		// 已选择联系人区域自动缩放并做适当scroll,以保证最新添加的联系人显示在视图中 
 		autoZoom : function () {
-			var spans = hook.showPhones.find('span');	
+			var spans = hook.showPhones.all('span');	
 			var totalWidth = 0 , maxWidth = $('body').width();
 
 			for (var i = spans.length ; i -- ;) {
-				totalWidth += spans.eq(i).width() + 5;	
+				totalWidth += spans.item(i).width() + 5;	
 			}
 			totalWidth += 45;
 			
@@ -312,7 +310,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 			this.pushData();
 
 			// 保证后触发事件
-			_.delay(function () {
+			S.later(function () {
 				self.prevSelectPhones(preSelectArr);	
 			} , 0);
 			
@@ -546,7 +544,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 
 } , {
 	
-	requires : ['gallery/contacts/1.0/underscore' , 'gallery/contacts/1.0/backbone' , 'gallery/contacts/1.0/iscroll' , 'gallery/contacts/1.0/pinyin' , 'gallery/contacts/1.0/confirm' , 'base']
+	requires : ['gallery/backbone-lite/1.0/' , 'gallery/contacts/1.0/iscroll' , 'gallery/contacts/1.0/pinyin' , 'gallery/confirm/1.0/' , 'base']
 
 });
 
