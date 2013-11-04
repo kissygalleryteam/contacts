@@ -25,6 +25,26 @@ module.exports = function(grunt) {
                     {
                         src: "<%= pkg.version %>/index.js",
                         dest: "<%= pkg.version %>/build/index.js"
+                    },
+                    {
+                        src: "<%= pkg.version %>/underscore.js",
+                        dest: "<%= pkg.version %>/build/underscore.js"
+                    },
+                    {
+                        src: "<%= pkg.version %>/zepto.js",
+                        dest: "<%= pkg.version %>/build/zepto.js"
+                    },
+                    {
+                        src: "<%= pkg.version %>/backbone.js",
+                        dest: "<%= pkg.version %>/build/backbone.js"
+                    },
+                    {
+                        src: "<%= pkg.version %>/pinyin.js",
+                        dest: "<%= pkg.version %>/build/pinyin.js"
+                    },
+                    {
+                        src: "<%= pkg.version %>/iscroll.js",
+                        dest: "<%= pkg.version %>/build/iscroll.js"
                     }
                 ]
             }
