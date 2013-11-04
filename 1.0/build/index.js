@@ -361,7 +361,10 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Piny
 				});
 				return;
 			}
-			this.trigger('selectDone' ,  selectphones.toJSON());
+			selectphones.each(function (val , i) {
+				arr.push(val.toJSON());
+			});
+			this.trigger('selectDone' ,  arr);
 		},
 
 		// 各种按钮的二态
