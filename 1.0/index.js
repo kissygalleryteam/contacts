@@ -2343,7 +2343,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 
 } , {
 	
-	requires : ['gallery/contacts/1.0/underscore' , 'gallery/contacts/1.0/backbone' , 'gallery/contacts/1.0/iscroll' , 'gallery/contacts/1.0/pinyin' , 'gallery/contacts/1.0/confirm' , 'node' , 'base']
+	requires : ['gallery/contacts/1.0/underscore' , 'gallery/contacts/1.0/backbone' , 'gallery/contacts/1.0/iscroll' , 'gallery/contacts/1.0/pinyin' , 'gallery/contacts/1.0/confirm' , 'base']
 
 });
 
