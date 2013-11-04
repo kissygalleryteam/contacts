@@ -1,3 +1,9 @@
+/*
+combined files : 
+
+gallery/contacts/1.0/index
+
+*/
 /**
  * @fileoverview 
  * @author 栋寒<donghan@taobao.com>
@@ -546,7 +552,8 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , _ , Backbone , Iscroll , 
 
 } , {
 	
-	requires : ['gallery/contacts/1.0/underscore' , 'gallery/contacts/1.0/backbone' , 'gallery/contacts/1.0/iscroll' , 'gallery/contacts/1.0/pinyin' , 'gallery/contacts/1.0/confirm' , 'base']
+	requires : ['gallery/gallery/contacts/1.0/underscore' , 'gallery/gallery/contacts/1.0/backbone' , 'gallery/gallery/contacts/1.0/iscroll' , 'gallery/gallery/contacts/1.0/pinyin' , 'gallery/gallery/contacts/1.0/confirm' , 'base']
 
 });
+
 
