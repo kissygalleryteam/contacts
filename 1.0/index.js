@@ -547,7 +547,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Piny
 
 } , {
 	
-	requires : ['gallery/backbone-lite/1.0/' , 'gallery/contacts/1.0/iscroll' , 'gallery/contacts/1.0/pinyin' , 'gallery/confirm/1.0/' , 'base']
+	requires : ['gallery/backbone-lite/1.0/' , './iscroll' , './pinyin' , 'gallery/confirm/1.0/' , 'base']
 
 });
 
