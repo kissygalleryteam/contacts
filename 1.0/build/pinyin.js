@@ -6,7 +6,7 @@ gallery/contacts/1.0/pinyin
 */
 
 
-KISSY.add('gallery/contacts/1.0/pinyin' , function (S) {
+KISSY.add('gallery/contacts/1.0/pinyin', function (S) {
 	var Pinyin = function (options) {
 		this.initialize(options);
 	};
