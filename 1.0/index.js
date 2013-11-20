@@ -308,6 +308,7 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Piny
 			this.buildPhoneScroll();
 
 			this.pushData();
+			this.bindEvent();
 
 			// 保证后触发事件
 			S.later(function () {
@@ -315,6 +316,13 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Piny
 			} , 0);
 			
 				
+		},
+
+		bindEvent : function () {
+			var self = this;
+			$('#sidebar').delegate('click' , 'li' , function (e) {
+				self.skipToIndex.call(self , e);
+			});
 		},
 
 		// 初始化已经选择的联系人
@@ -529,9 +537,9 @@ KISSY.add("gallery/contacts/1.0/index" , function (S , Backbone , Iscroll , Piny
 		// 点击右侧检索字母,联系人跳转到相应位置
 		skipToIndex : function (e) {
 			var index = $(e.currentTarget).html();
-			var dts = hook.phonesbox.find('.title') , _index;
+			var dts = hook.phonesbox.all('.title') , _index;
 			for (var i = dts.length ; i-- ; ) {
-				var div = dts.eq(i).find('div');
+				var div = dts.item(i).one('div');
 				if (div.html() === index) {
 					_index = i;
 					break;
